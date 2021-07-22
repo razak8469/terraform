@@ -38,6 +38,20 @@ While some attributes can be updated in-place (which are shown with the ~ prefix
 
 The - prefix indicates that the instance and the network will be destroyed. 
 
+#### create resource dependencies
+##### assign a static ip address
+- create a resoure that allocates a reserved ip address
+- attach the ip address to the instance
+
+The access_config block has several optional arguments, and in this case you'll set nat_ip to be the static IP address. 
+
+	terraform plan -out static_ip
+
+Saving the plan this way ensures that you can apply exactly the same plan in the future. 
+
+	terraform apply "static_ip"
+
+
 
 
 
