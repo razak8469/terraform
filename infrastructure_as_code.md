@@ -51,6 +51,14 @@ Saving the plan this way ensures that you can apply exactly the same plan in the
 
 	terraform apply "static_ip"
 
+##### implicit and explicit dependencies
+
+Implicit dependencies via interpolation expressions are the primary way to inform Terraform about these relationships, and should be used whenever possible.
+
+The depends_on argument can be added to any resource and accepts a list of resources to create explicit dependencies for.
+
+###### add a cloud storage bucket and an instance  with an explicit dependency on the bucket
+The order that resources are defined in a terraform configuration file has no effect on how Terraform applies your changes. 
 
 
 
