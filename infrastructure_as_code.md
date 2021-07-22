@@ -23,6 +23,22 @@
 ###### check progress
 - verify the addition and the update to the infrastructure
 
+##### destructive changes
+A destructive change is a change that requires the provider to replace the existing resource rather than updating it. 
+
+This usually happens because the cloud provider doesn't support updating the resource in the way described by your configuration.
+
+
+The prefix -/+ means that Terraform will destroy and recreate the resource, rather than updating it in-place. 
+
+While some attributes can be updated in-place (which are shown with the ~ prefix), changing the boot disk image for an instance requires recreating it. 
+
+##### Destroy Infrastructure
+	terraform destroy
+
+The - prefix indicates that the instance and the network will be destroyed. 
+
+
 
 
 
