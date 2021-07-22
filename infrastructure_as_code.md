@@ -60,6 +60,41 @@ The depends_on argument can be added to any resource and accepts a list of resou
 ###### add a cloud storage bucket and an instance  with an explicit dependency on the bucket
 The order that resources are defined in a terraform configuration file has no effect on how Terraform applies your changes. 
 
+#### provision infrastructure
+##### defining a provisioner
+- add provisioner block within the resource block
+
+The local-exec provisioner executes a command locally on the machine running Terraform, not the VM instance itself. 
+
+Each VM instance can have multiple network interfaces, so refer to the first one with network_interface[0], count starting from 0, as most programming languages do. 
+
+Each network interface can have multiple access_config blocks as well, so once again you specify the first one.
+
+Provisioners only run when a resource is created, but adding a provisioner does not force that resource to be destroyed and recreated.
+
+Use terraform taint to tell Terraform to recreate the instance:
+
+	terraform taint google_compute_instance.vm_instance
+
+A tainted resource will be destroyed and recreated during the next apply.
+
+##### failed provisioners and tainted resources
+If a resource is successfully created but fails a provisioning step, Terraform will error and mark the resource as tainted. 
+
+A resource that is tainted still exists, but shouldn't be considered safe to use, since provisioning failed.
+
+When you generate your next execution plan, Terraform will remove any tainted resources and create new resources, attempting to provision them again after creation.
+
+##### destroy provisioners 
+Provisioners can also be defined that run only during a destroy operation. 
+
+These are useful for performing system cleanup, extracting data, etc.
+
+For many resources, using built-in cleanup mechanisms is recommended if possible (such as init scripts), but provisioners can be used if necessary.
+
+
+
+
 
 
 
