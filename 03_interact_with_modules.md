@@ -139,8 +139,17 @@ Both the terraform get and terraform init commands will install and update modul
 The terraform init command will also initialize backends and install plugins.
 
 ##### Upload files to the bucket
+```
+cd ~
 
-	gsutil cp *.html gs://YOUR-BUCKET-NAME
+curl https://raw.githubusercontent.com/hashicorp/learn-terraform-modules/ 
+	master/modules/aws-s3-static-website-bucket/www/index.html > index.html
+curl https://raw.githubusercontent.com/hashicorp/learn-terraform-modules/  		
+	blob/master/modules/aws-s3-static-website-bucket/www/error.html > error.html
+
+gsutil cp *.html gs://YOUR-BUCKET-NAME
+```
+
 
 ##### Clean up the website and infrastructure
 
