@@ -10,7 +10,8 @@ resource "google_storage_bucket" "test-bucket-for-state" {
 }
 
 terraform {
-  backend "local" {
-    path = "terraform/state/terraform.tfstate"
+  backend "gcs" {
+    bucket = "<YOUR_BUCKET_NAME>"
+    prefix = "terraform/state"
   }
 }
